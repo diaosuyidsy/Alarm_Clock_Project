@@ -40,7 +40,7 @@ public class Buttonlighter : MonoBehaviour {
 		tmp++;
 		if (tmp == 60) {
 			//set button red
-			updateFlash();
+			StartCoroutine(updateFlash());
 
 			tmp = 0;
 		}
