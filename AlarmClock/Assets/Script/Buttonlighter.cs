@@ -14,13 +14,14 @@ public class Buttonlighter : MonoBehaviour {
 	public GameObject button8;
 	public GameObject button9;
 	private GameObject[] buttons;
-	private int counter = 20;
+	private int playerscore = 0;
 	private long tmp;
 
-	public GameObject score;
+	public Text score;
 
 	// Use this for initialization
 	void Start () {
+		score.text = "Score:" + playerscore;
 		buttons = new GameObject[9];
 		buttons [0] = button1;
 		buttons [1] = button2;
@@ -48,14 +49,27 @@ public class Buttonlighter : MonoBehaviour {
 
 	IEnumerator updateFlash(){
 		int number = Random.Range(0, 8);
+		buttons [number].GetComponent<Stats> ().setclickable (true);
+
+
 		Button b = buttons[number].GetComponent<Button>();
+		b.onClick.AddListener(() => actionOnClick (buttons [number]));
 		ColorBlock cb = b.colors;
 		cb.normalColor = Color.red;
 		b.colors = cb;
-		Debug.Log ("Changed to red");
-		yield return new WaitForSeconds (0.5f);
+		yield return new WaitForSeconds (2.0f);
 		cb.normalColor = Color.white;
 		b.colors = cb;
-		Debug.Log ("Changed to white");
+		buttons [number].GetComponent<Stats> ().setclickable (false);
+	}
+
+	void actionOnClick(GameObject o){
+		if(o.GetComponent<Stats> ().getclickable())
+		{
+			Debug.Log ("Success click");
+			playerscore++;
+			score.text = "Score:" + playerscore;
+			o.GetComponent<Stats> ().setclickable (false);
+		}
 	}
 }
