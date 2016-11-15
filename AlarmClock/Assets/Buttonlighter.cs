@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Buttonlighter : MonoBehaviour {
@@ -39,10 +40,22 @@ public class Buttonlighter : MonoBehaviour {
 		tmp++;
 		if (tmp == 60) {
 			//set button red
-			int number = Random.Range(0, 8);
-			buttons [number].GetComponent<Button> () = Color.red;
+			updateFlash();
 
 			tmp = 0;
 		}
+	}
+
+	IEnumerator updateFlash(){
+		int number = Random.Range(0, 8);
+		Button b = buttons[number].GetComponent<Button>();
+		ColorBlock cb = b.colors;
+		cb.normalColor = Color.red;
+		b.colors = cb;
+		Debug.Log ("Changed to red");
+		yield return new WaitForSeconds (0.5f);
+		cb.normalColor = Color.white;
+		b.colors = cb;
+		Debug.Log ("Changed to white");
 	}
 }
