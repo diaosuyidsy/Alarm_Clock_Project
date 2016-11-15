@@ -32,10 +32,6 @@ public class Buttonlighter : MonoBehaviour {
 		buttons [6] = button7;
 		buttons [7] = button8;
 		buttons [8] = button9;
-//		for (int i = 0; i <= 8; i++) {
-//			Button myButton = buttons [i].GetComponent<Button> ();
-//			myButton.onClick.AddListener (() => actionOnClick (buttons [i]));
-//		}
 		tmp = 0;
 		// todo
 	}
@@ -73,6 +69,7 @@ public class Buttonlighter : MonoBehaviour {
 			Debug.Log ("Success click");
 			playerscore++;
 			score.text = "Score:" + playerscore;
+			o.GetComponent<Stats> ().setclickable (false);
 		}
 	}
 }
