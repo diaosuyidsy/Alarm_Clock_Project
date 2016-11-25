@@ -57,7 +57,7 @@ public class Buttonlighter : MonoBehaviour {
 		ColorBlock cb = b.colors;
 		cb.normalColor = Color.red;
 		b.colors = cb;
-		yield return new WaitForSeconds (2.0f);
+		yield return new WaitForSeconds (1.0f);
 		cb.normalColor = Color.white;
 		b.colors = cb;
 		buttons [number].GetComponent<Stats> ().setclickable (false);
@@ -71,5 +71,10 @@ public class Buttonlighter : MonoBehaviour {
 			score.text = "Score:" + playerscore;
 			o.GetComponent<Stats> ().setclickable (false);
 		}
+	}
+
+	public int getPlayerScore()
+	{
+		return playerscore;
 	}
 }

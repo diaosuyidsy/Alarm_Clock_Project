@@ -29,8 +29,6 @@ public class clock1 : MonoBehaviour
 
 	void Update()
 	{
-		
-
 		timeNow = DateTime.Now;
 		if (timeNow.Hour.ToString().Equals(hour_string) && timeNow.Minute.ToString().Equals(minute_string) && timeNow.Second.ToString().Equals("0"))
 		{
