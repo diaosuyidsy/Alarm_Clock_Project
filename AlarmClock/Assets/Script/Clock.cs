@@ -7,6 +7,8 @@ public class Clock : MonoBehaviour {
 	private AudioSource audio1;
 	private DateTime timeNow;
 
+
+
 	void Start()
 	{
 		timeNow = DateTime.Now;
