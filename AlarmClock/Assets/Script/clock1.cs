@@ -19,6 +19,7 @@ public class clock1 : MonoBehaviour
 
 	void Start()
 	{
+		Application.runInBackground = true;
 		timeNow = DateTime.Now;
 		audio1 = GetComponent<AudioSource>();
 
