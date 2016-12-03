@@ -12,6 +12,9 @@ public class clock1 : MonoBehaviour
 	public Dropdown hour1;
 	public Dropdown minute1;
 	public Button b1;
+	public Button b2;
+	public GameObject canvas;
+	public GameObject canvas0;
 	private int count = 0;
 
 	private String hour_string;
@@ -19,11 +22,17 @@ public class clock1 : MonoBehaviour
 
 	void Start()
 	{
+		Calarm.askForUserPermitCS ();
+		Application.runInBackground = true;
 		timeNow = DateTime.Now;
 		audio1 = GetComponent<AudioSource>();
 
 		Button b = b1.GetComponent<Button>();
 		b.onClick.AddListener(() => actionOnClick(b));
+
+		Button c = b2.GetComponent<Button>();
+		c.onClick.AddListener(() => actionOnClick2(c));
+
 
 	}
 
@@ -53,10 +62,10 @@ public class clock1 : MonoBehaviour
 
 	void ring()
 	{
-		audio1.Play();
-		Debug.Log("actually rings");
-		audio1.Play(44100);
-		SceneManager.LoadScene("Login");
+//		audio1.Play();
+//		Debug.Log("actually rings");
+//		audio1.Play(44100);
+//		SceneManager.LoadScene("Login");
 
 	}
 
@@ -68,6 +77,28 @@ public class clock1 : MonoBehaviour
 		hour_string = hour1.GetComponent<Dropdown>().captionText.text;
 		minute_string = minute1.GetComponent<Dropdown>().captionText.text;
 
+		int hour_int = 0;
+		int minute_int = 0;
+
+		Int32.TryParse (hour_string, out hour_int);
+		Int32.TryParse (minute_string, out minute_int);
+
+		Debug.Log (hour_int);
+
+		//register alarm in unity "settings" script
+		GameObject.Find("Main Camera").GetComponent<settings>().setHour(hour_int);
+		GameObject.Find("Main Camera").GetComponent<settings>().setMinute(minute_int);
+
+		//register for ios alarm
+		Calarm.registerForAlarmCS (hour_int, minute_int);
+
+	}
+
+	void actionOnClick2(Button c)
+	{   
+		Debug.Log("Success click2");
+		canvas0.SetActive(false);
+		canvas.SetActive(true);
 
 	}
 
