@@ -65,7 +65,7 @@ public class clock1 : MonoBehaviour
 //		audio1.Play();
 //		Debug.Log("actually rings");
 //		audio1.Play(44100);
-		SceneManager.LoadScene("Login");
+//		SceneManager.LoadScene("Login");
 
 	}
 
@@ -85,6 +85,11 @@ public class clock1 : MonoBehaviour
 
 		Debug.Log (hour_int);
 
+		//register alarm in unity "settings" script
+		GameObject.Find("Main Camera").GetComponent<settings>().setHour(hour_int);
+		GameObject.Find("Main Camera").GetComponent<settings>().setMinute(minute_int);
+
+		//register for ios alarm
 		Calarm.registerForAlarmCS (hour_int, minute_int);
 
 	}

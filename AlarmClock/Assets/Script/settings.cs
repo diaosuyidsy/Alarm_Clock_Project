@@ -18,6 +18,9 @@ public class settings : MonoBehaviour {
 	public Button a_7;
 	public GameObject canvas;
 	public GameObject canvas0;
+
+	private int HOUR;
+	private int MINUTE;
 	// Use this for initialization
 	void Start () {
 		
@@ -45,12 +48,6 @@ public class settings : MonoBehaviour {
 		Button a7 = a_7.GetComponent<Button>();
 		b.onClick.AddListener(() => actionOnClick7(a7));
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
 
 	void actionOnClick0(Button c)
 	{
@@ -76,4 +73,29 @@ public class settings : MonoBehaviour {
 	option = 1;}
 	void actionOnClick7(Button c) { 
 	option = 2;}
+
+	public void setHour(int hour)
+	{
+		HOUR = hour;
+	}
+
+	public void setMinute(int minute)
+	{
+		MINUTE = minute;
+	}
+
+	public int getHour()
+	{
+		return HOUR;
+	}
+
+	public int getMinute()
+	{
+		return MINUTE;
+	}
+
+	public void loadGameScene(string message)
+	{
+		SceneManager.LoadScene("Login");
+	}
 }
