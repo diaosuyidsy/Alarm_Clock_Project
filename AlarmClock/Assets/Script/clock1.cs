@@ -19,6 +19,7 @@ public class clock1 : MonoBehaviour
 
 	void Start()
 	{
+		Calarm.askForUserPermitCS ();
 		Application.runInBackground = true;
 		timeNow = DateTime.Now;
 		audio1 = GetComponent<AudioSource>();
@@ -54,9 +55,9 @@ public class clock1 : MonoBehaviour
 
 	void ring()
 	{
-		audio1.Play();
-		Debug.Log("actually rings");
-		audio1.Play(44100);
+//		audio1.Play();
+//		Debug.Log("actually rings");
+//		audio1.Play(44100);
 		SceneManager.LoadScene("Login");
 
 	}
@@ -69,6 +70,15 @@ public class clock1 : MonoBehaviour
 		hour_string = hour1.GetComponent<Dropdown>().captionText.text;
 		minute_string = minute1.GetComponent<Dropdown>().captionText.text;
 
+		int hour_int = 0;
+		int minute_int = 0;
+
+		Int32.TryParse (hour_string, out hour_int);
+		Int32.TryParse (minute_string, out minute_int);
+
+		Debug.Log (hour_int);
+
+		Calarm.registerForAlarmCS (hour_int, minute_int);
 
 	}
 
