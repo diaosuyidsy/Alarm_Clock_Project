@@ -12,6 +12,9 @@ public class clock1 : MonoBehaviour
 	public Dropdown hour1;
 	public Dropdown minute1;
 	public Button b1;
+	public Button b2;
+	public GameObject canvas;
+	public GameObject canvas0;
 	private int count = 0;
 
 	private String hour_string;
@@ -24,6 +27,10 @@ public class clock1 : MonoBehaviour
 
 		Button b = b1.GetComponent<Button>();
 		b.onClick.AddListener(() => actionOnClick(b));
+
+		Button c = b2.GetComponent<Button>();
+		c.onClick.AddListener(() => actionOnClick2(c));
+
 
 	}
 
@@ -68,6 +75,14 @@ public class clock1 : MonoBehaviour
 		hour_string = hour1.GetComponent<Dropdown>().captionText.text;
 		minute_string = minute1.GetComponent<Dropdown>().captionText.text;
 
+
+	}
+
+	void actionOnClick2(Button c)
+	{   
+		Debug.Log("Success click2");
+		canvas0.SetActive(false);
+		canvas.SetActive(true);
 
 	}
 
