@@ -20,7 +20,7 @@ extern "C"
                               completionHandler:^(BOOL granted, NSError * _Nullable error) {
                                   if (!error) {
                                       NSLog(@"request authorization succeeded!");
-//                                      [self showAlert];
+                                      //                                      [self showAlert];
                                   }
                               }];
         return true;
@@ -40,11 +40,12 @@ extern "C"
                                                              arguments:nil];
         content.sound = [UNNotificationSound defaultSound];
         
-//        // Deliver the notification in five seconds.
-//        UNTimeIntervalNotificationTrigger *trigger = [UNTimeIntervalNotificationTrigger
-//                                                      triggerWithTimeInterval:5.f repeats:NO];
+        //        // Deliver the notification in five seconds.
+        //        UNTimeIntervalNotificationTrigger *trigger = [UNTimeIntervalNotificationTrigger
+        //                                                      triggerWithTimeInterval:5.f repeats:NO];
         UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:@"FiveSecond"
                                                                               content:content trigger:trigger];
+        
         /// 3. schedule localNotification
         UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
         [center addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
@@ -52,6 +53,9 @@ extern "C"
                 NSLog(@"add NotificationRequest succeeded!");
             }
         }];
+        //update hour and minute
+        HOUR = hour;
+        MINUTE = minute;
     }
 #ifdef __cplusplus
 }

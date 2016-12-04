@@ -24,32 +24,24 @@ public class settings : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		
-		Button b = b0.GetComponent<Button>();
-		b.onClick.AddListener(() => actionOnClick0(b));
+		b0.onClick.AddListener(() => actionOnClick0());
 
-		Button a1 = a_1.GetComponent<Button>();
-		b.onClick.AddListener(() => actionOnClick1(a1));
+		a_1.onClick.AddListener(() => actionOnClick1());
 
-		Button a2 = a_2.GetComponent<Button>();
-		b.onClick.AddListener(() => actionOnClick2(a2));
+		a_2.onClick.AddListener(() => actionOnClick2());
 
-		Button a3 = a_3.GetComponent<Button>();
-		b.onClick.AddListener(() => actionOnClick3(a3));
+		a_3.onClick.AddListener(() => actionOnClick3());
 
-		Button a4 = a_4.GetComponent<Button>();
-		b.onClick.AddListener(() => actionOnClick4(a4));
+		a_4.onClick.AddListener(() => actionOnClick4());
 
-		Button a5 = a_5.GetComponent<Button>();
-		b.onClick.AddListener(() => actionOnClick5(a5));
+		a_5.onClick.AddListener(() => actionOnClick5());
 
-		Button a6 = a_6.GetComponent<Button>();
-		b.onClick.AddListener(() => actionOnClick6(a6));
+		a_6.onClick.AddListener(() => actionOnClick6());
 
-		Button a7 = a_7.GetComponent<Button>();
-		b.onClick.AddListener(() => actionOnClick7(a7));
+		a_7.onClick.AddListener(() => actionOnClick7());
 	}
 
-	void actionOnClick0(Button c)
+	void actionOnClick0()
 	{
 		Debug.Log("Success click2");
 		canvas0.SetActive(true);
@@ -58,20 +50,20 @@ public class settings : MonoBehaviour {
 	}
 
 
-	void actionOnClick1(Button c) { 
+	void actionOnClick1() { 
 	speed = 1;
 	}
-	void actionOnClick2(Button c) { 
+	void actionOnClick2() { 
 	speed = 2;}
-	void actionOnClick3(Button c) { 
+	void actionOnClick3() { 
 	speed = 3;}
-	void actionOnClick4(Button c) {
+	void actionOnClick4() {
 	speed = 4;}
-	void actionOnClick5(Button c) {
+	void actionOnClick5() {
 	speed = 5;}
-	void actionOnClick6(Button c) { 
+	void actionOnClick6() { 
 	option = 1;}
-	void actionOnClick7(Button c) { 
+	void actionOnClick7() { 
 	option = 2;}
 
 	public void setHour(int hour)
@@ -96,6 +88,12 @@ public class settings : MonoBehaviour {
 
 	public void loadGameScene(string message)
 	{
-		SceneManager.LoadScene("Login");
+		if (option == 1) {
+			SceneManager.LoadScene ("Login");
+		} else {
+			SceneManager.LoadScene ("game2");
+		}
+
+
 	}
 }
