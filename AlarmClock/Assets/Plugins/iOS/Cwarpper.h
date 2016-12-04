@@ -15,5 +15,8 @@
 
 int HOUR;
 int MINUTE;
+bool GAMEDONE=true;
+
+UNUserNotificationCenter *center;
 
 #endif /* Cwarpper_h */

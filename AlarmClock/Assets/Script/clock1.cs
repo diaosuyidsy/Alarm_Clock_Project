@@ -15,6 +15,8 @@ public class clock1 : MonoBehaviour
 	public Button b2;
 	public GameObject canvas;
 	public GameObject canvas0;
+
+	private bool selected;
 	private int count = 0;
 
 	private String hour_string;
@@ -32,6 +34,8 @@ public class clock1 : MonoBehaviour
 
 		Button c = b2.GetComponent<Button>();
 		c.onClick.AddListener(() => actionOnClick2(c));
+
+		selected = false;
 
 
 	}
@@ -74,23 +78,39 @@ public class clock1 : MonoBehaviour
 	{
 		Debug.Log("Success click");
 
-		hour_string = hour1.GetComponent<Dropdown>().captionText.text;
-		minute_string = minute1.GetComponent<Dropdown>().captionText.text;
-
+		//get the hour and int in the dropdown selection
 		int hour_int = 0;
 		int minute_int = 0;
+
+		hour_string = hour1.GetComponent<Dropdown>().captionText.text;
+		minute_string = minute1.GetComponent<Dropdown>().captionText.text;
 
 		Int32.TryParse (hour_string, out hour_int);
 		Int32.TryParse (minute_string, out minute_int);
 
-		Debug.Log (hour_int);
+		//if not selected, register for the clock, if selected, unregister it
+		if (!selected) {
+			//move to selected position
+			b.GetComponent<RectTransform> ().localPosition = new Vector3 (237f, 343.3f, 0f);
+			selected = true;
 
-		//register alarm in unity "settings" script
-		GameObject.Find("Main Camera").GetComponent<settings>().setHour(hour_int);
-		GameObject.Find("Main Camera").GetComponent<settings>().setMinute(minute_int);
+			//register alarm in unity "settings" script
+			GameObject.Find("Main Camera").GetComponent<settings>().setHour(hour_int);
+			GameObject.Find("Main Camera").GetComponent<settings>().setMinute(minute_int);
 
-		//register for ios alarm
-		Calarm.registerForAlarmCS (hour_int, minute_int);
+			//register for ios alarm
+			Calarm.registerForAlarmCS (hour_int, minute_int);
+		} else {
+			//move to unselected position
+			b.GetComponent<RectTransform> ().localPosition = new Vector3 (182f, 343.3f, 0f);
+			selected = false;
+
+			//unregister for ios alarm
+			Calarm.unregisterForAlarmCS();
+		}
+
+
+
 
 	}
 

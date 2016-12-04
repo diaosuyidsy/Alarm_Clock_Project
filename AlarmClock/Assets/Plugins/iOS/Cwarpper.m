@@ -43,15 +43,29 @@ extern "C"
                                                                               content:content trigger:trigger];
         
         /// 3. schedule localNotification
-        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+        center = [UNUserNotificationCenter currentNotificationCenter];
         [center addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
             if (!error) {
                 NSLog(@"add NotificationRequest succeeded!");
             }
         }];
+        
+        //set game is not done;
+        GAMEDONE = false;
+        
         //update hour and minute
         HOUR = hour;
         MINUTE = minute;
+    }
+    
+    void unregisterForAlarm()
+    {
+        [center removeAllPendingNotificationRequests];
+    }
+    
+    void setGameDone(bool done)
+    {
+        GAMEDONE = done;
     }
 #ifdef __cplusplus
 }
