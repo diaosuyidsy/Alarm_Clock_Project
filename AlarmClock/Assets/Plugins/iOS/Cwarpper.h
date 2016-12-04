@@ -9,10 +9,11 @@
 #ifndef Cwarpper_h
 #define Cwarpper_h
 
-@import UserNotifications;
-@import Foundation;
-@import UIKit;
+#import <UserNotifications/UserNotifications.h>
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-
+int HOUR;
+int MINUTE;
 
 #endif /* Cwarpper_h */
