@@ -20,7 +20,6 @@ extern "C"
                               completionHandler:^(BOOL granted, NSError * _Nullable error) {
                                   if (!error) {
                                       NSLog(@"request authorization succeeded!");
-                                      //                                      [self showAlert];
                                   }
                               }];
         return true;
@@ -35,14 +34,11 @@ extern "C"
         UNCalendarNotificationTrigger *trigger = [UNCalendarNotificationTrigger triggerWithDateMatchingComponents:dateComponents repeats:YES];
         
         UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc] init];
-        content.title = [NSString localizedUserNotificationStringForKey:@"Suyi said:" arguments:nil];
-        content.body = [NSString localizedUserNotificationStringForKey:@"Hello Pence！Get up, let's play with Ken!"
+        content.title = [NSString localizedUserNotificationStringForKey:@"I said:" arguments:nil];
+        content.body = [NSString localizedUserNotificationStringForKey:@"Hello！Get up, let's ROLL!!!"
                                                              arguments:nil];
-        content.sound = [UNNotificationSound defaultSound];
+        content.sound = [UNNotificationSound soundNamed:@"Nightmare.wav"];
         
-        //        // Deliver the notification in five seconds.
-        //        UNTimeIntervalNotificationTrigger *trigger = [UNTimeIntervalNotificationTrigger
-        //                                                      triggerWithTimeInterval:5.f repeats:NO];
         UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:@"FiveSecond"
                                                                               content:content trigger:trigger];
         
