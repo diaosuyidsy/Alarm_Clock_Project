@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class game2 : MonoBehaviour
 {
@@ -15,15 +16,17 @@ public class game2 : MonoBehaviour
 	public GameObject button8;
 	public GameObject button9;
 	private GameObject[] buttons;
-	private int playerscore = 0;
+	public int playerscore = 0;
 	private long tmp;
-	private int index = 1;
-
 	public Text score;
+	private int loop = 1;
 
+	private List<GameObject> result;
+	private List<GameObject> copy;
 	// Use this for initialization
 	void Start()
 	{
+		result = new List<GameObject>();
 		score.text = "Score:" + playerscore;
 		buttons = new GameObject[9];
 		buttons[0] = button1;
@@ -36,7 +39,33 @@ public class game2 : MonoBehaviour
 		buttons[7] = button8;
 		buttons[8] = button9;
 		tmp = 0;
-		// todo
+
+
+		var rand = new System.Random();
+
+		HashSet<int> check = new HashSet<int>();
+		for (int i = 0; i < 5 ;i++)
+		{
+			int curValue = rand.Next(0, 9);
+			while (check.Contains(curValue))
+			{
+				curValue = rand.Next(0, 9);
+			}
+			buttons[curValue].GetComponent<Stats>().setclickable(true);
+			result.Add(buttons[curValue]);
+			check.Add(curValue);
+		}
+		copy= new List<GameObject>(result);
+		Debug.Log("hi ");
+
+
+		    
+
+			
+
+
+
+
 	}
 
 	// Update is called once per frame
@@ -45,36 +74,72 @@ public class game2 : MonoBehaviour
 		tmp++;
 		if (tmp == 60)
 		{
-			//set button red
-			StartCoroutine(updateFlash());
+			
+
+			if (result.Count != 0)
+			{
+				GameObject g = result[0];
+				result.Remove(g);
+				//set button red
+				//StartCoroutine(updateFlash(g));
+				updateFlash(g);
+				Debug.Log("update_finish");
+
+			}
+
+
+			if (result.Count == 0 && loop == 1)
+			{
+				loop++;
+
+				copy[0].GetComponent<Stats>().setclickable(true);
+				Button t = copy[0].GetComponent<Button>();
+				t.onClick.AddListener(() => actionOnClick(copy[0]));
+				Debug.Log("0 ");
+
+				copy[1].GetComponent<Stats>().setclickable(true);
+				t = copy[1].GetComponent<Button>();
+				t.onClick.AddListener(() => actionOnClick(copy[1]));
+				Debug.Log("1 ");
+
+				copy[2].GetComponent<Stats>().setclickable(true);
+				t = copy[2].GetComponent<Button>();
+				t.onClick.AddListener(() => actionOnClick(copy[2]));
+
+				Debug.Log("2 ");
+
+				copy[3].GetComponent<Stats>().setclickable(true);
+				t = copy[3].GetComponent<Button>();
+				t.onClick.AddListener(() => actionOnClick(copy[3]));
+				Debug.Log("3 ");
+
+				copy[4].GetComponent<Stats>().setclickable(true);
+				t = copy[4].GetComponent<Button>();
+				t.onClick.AddListener(() => actionOnClick(copy[4]));
+				Debug.Log("4 ");
+			}
 
 			tmp = 0;
 		}
 	}
 
-	IEnumerator updateFlash()
+	//IEnumerator updateFlash(GameObject g)
+	void updateFlash(GameObject g)
+
 	{
-		int number = 0;
-		if (index % 9==0)
-		{
-			number = 8;
-		}
-		else { number = index % 9 - 1; }
-
-		index++;
-
-		buttons[number].GetComponent<Stats>().setclickable(true);
+		
 
 
-		Button b = buttons[number].GetComponent<Button>();
-		b.onClick.AddListener(() => actionOnClick(buttons[number]));
+
+
+		Button b = g.GetComponent<Button>();
+
 		ColorBlock cb = b.colors;
 		cb.normalColor = Color.red;
 		b.colors = cb;
-		yield return new WaitForSeconds(1.0f);
-		cb.normalColor = Color.white;
-		b.colors = cb;
-		buttons[number].GetComponent<Stats>().setclickable(false);
+		//yield return new WaitForSeconds(1.0f);
+		Debug.Log("Turned red");
+
 	}
 
 	void actionOnClick(GameObject o)
@@ -85,6 +150,8 @@ public class game2 : MonoBehaviour
 			playerscore++;
 			score.text = "Score:" + playerscore;
 			o.GetComponent<Stats>().setclickable(false);
+
+			o.GetComponent<Image>().color = Color.white;
 		}
 	}
 
